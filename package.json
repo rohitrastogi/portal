@@ -17,5 +17,6 @@
   },
   "homepage": "https://github.com/NUWildHacks/api#readme",
   "dependencies": {
+    "express": "^4.13.3"
   }
 }

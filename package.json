@@ -1,0 +1,21 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "Wildhacks API",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NUWildHacks/api.git"
+  },
+  "author": "Nevil George",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NUWildHacks/api/issues"
+  },
+  "homepage": "https://github.com/NUWildHacks/api#readme",
+  "dependencies": {
+  }
+}

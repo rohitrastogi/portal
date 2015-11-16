@@ -1,7 +1,16 @@
 // server.js
 
+// dependencies
 var express = require('express');
+
+// modules
+var applicationRouter = require('./routes/applications.js');
+
 var app = express();
+
+// apply application routes to app
+// endpoints are /application/<id>
+app.use('/application', applicationRouter);
 
 app.get('/', function(req, res) {
   res.send('Hello');

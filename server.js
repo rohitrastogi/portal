@@ -12,10 +12,12 @@ var app = express();
 // endpoints are /application/<id>
 app.use('/application', applicationRouter);
 
+app.set('port', 3000);
+
 app.get('/', function(req, res) {
-  res.send('Hello');
+  res.send('The Wildhacks API lives here!');
 });
 
-app.listen(3000, function() {
-  console.log('Listening on port ' + 3000);
+app.listen(app.get('port'), function() {
+  console.log('Listening on port ' + app.get('port'));
 });

@@ -15,8 +15,32 @@ applicationRouter.get('/', function(req, res) {
   });
 });
 
-applicationRouter.get('/id>', function(req, res) {
+applicationRouter.get('/:id/', function(req, res) {
   // return application with given id
+  var id = req.params.id;
+
+  Application.findById(id, function(err, application) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(application);
+    }
+  });
+});
+
+applicationRouter.get('/:key/:value', function(req, res) {
+  var key = req.params.key;
+  var value = req.params.value;
+  var criteria = {};
+  criteria[key] = value
+
+  Application.find(criteria, function(err, applications) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(applications);
+    }
+  });
 });
 
 applicationRouter.post('/', function(req, res) {
@@ -25,8 +49,9 @@ applicationRouter.post('/', function(req, res) {
   var application = new Application(req.body);
   application.save(function(err) {
     if (err) {
-      res.send(500, err);
+      res.send(err);
     } else {
+      // return positive status
       res.json({ status: true });
     }
   });

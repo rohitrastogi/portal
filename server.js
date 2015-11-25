@@ -6,14 +6,22 @@ var mongoose = require('mongoose');
 
 // modules
 var applicationRouter = require('./routes/applications.js');
-var secrets = require('./secrets.js');
+var db = require('./config/db.js');
 
 var app = express();
 
 // connect to remote DB
-var dbUsername = secrets['db']['username'];
-var dbPassword = secrets['db']['password'];
-mongoose.connect('mongodb://' + dbUsername + ':' + dbPassword + '@ds059694.mongolab.com:59694/wildhacks-api')
+// var dbUrl = (process.env === 'production' ? db.prodUrl : db.devUrl);
+var dbUrl = db.prodUrl;
+var mongoDB = mongoose.connect(dbUrl).connection;
+
+mongoDB.on('error', function(err) {
+  console.log(err);
+});
+
+mongoDB.once('open', function() {
+  console.log('DB connected!');
+});
 
 // apply application routes to app
 // endpoints are /application/<id>

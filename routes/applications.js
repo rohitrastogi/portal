@@ -6,6 +6,13 @@ var Application = require('../models/Application.js');
 
 applicationRouter.get('/all', function(req, res) {
   // return all applications
+  Application.find(function(err, applications) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(applications);
+    }
+  });
 });
 
 applicationRouter.get('/id>', function(req, res) {

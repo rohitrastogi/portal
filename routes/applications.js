@@ -4,7 +4,7 @@ var express = require('express');
 var applicationRouter = express.Router();
 var Application = require('../models/Application.js');
 
-applicationRouter.get('/all', function(req, res) {
+applicationRouter.get('/', function(req, res) {
   // return all applications
   Application.find(function(err, applications) {
     if (err) {
@@ -21,6 +21,15 @@ applicationRouter.get('/id>', function(req, res) {
 
 applicationRouter.post('/', function(req, res) {
   // create application
+  // create new instance of Application from req.body
+  var application = new Application(req.body);
+  application.save(function(err) {
+    if (err) {
+      res.send(500, err);
+    } else {
+      res.json({ status: true });
+    }
+  });
 });
 
 applicationRouter.put('/<id>', function(req, res) {

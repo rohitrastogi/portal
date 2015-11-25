@@ -3,12 +3,17 @@
 // dependencies
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 // modules
 var applicationRouter = require('./routes/applications.js');
 var db = require('./config/db.js');
 
 var app = express();
+
+// configure middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // connect to remote DB
 // var dbUrl = (process.env === 'production' ? db.prodUrl : db.devUrl);
@@ -25,7 +30,7 @@ mongoDB.once('open', function() {
 
 // apply application routes to app
 // endpoints are /application/<id>
-app.use('/application', applicationRouter);
+app.use('/applications', applicationRouter);
 
 app.set('port', 3000);
 

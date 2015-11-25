@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // connect to remote DB
-// var dbUrl = (process.env === 'production' ? db.prodUrl : db.devUrl);
+// var dbUrl = (process.env.NODE_ENV === 'production' ? db.prodUrl : db.devUrl);
 var dbUrl = db.prodUrl;
 var mongoDB = mongoose.connect(dbUrl).connection;
 

@@ -4,8 +4,8 @@ var express = require('express');
 var applicationRouter = express.Router();
 var Application = require('../models/Application.js');
 
+// return all applications
 applicationRouter.get('/', function(req, res) {
-  // return all applications
   Application.find(function(err, applications) {
     if (err) {
       res.send(err);
@@ -15,8 +15,8 @@ applicationRouter.get('/', function(req, res) {
   });
 });
 
+// get application by id
 applicationRouter.get('/:id/', function(req, res) {
-  // return application with given id
   var id = req.params.id;
 
   Application.findById(id, function(err, application) {
@@ -28,6 +28,8 @@ applicationRouter.get('/:id/', function(req, res) {
   });
 });
 
+// get applications by any key and value
+// eg. /applications/firstName/Nevil
 applicationRouter.get('/:key/:value', function(req, res) {
   var key = req.params.key;
   var value = req.params.value;
@@ -43,8 +45,8 @@ applicationRouter.get('/:key/:value', function(req, res) {
   });
 });
 
+// create application
 applicationRouter.post('/', function(req, res) {
-  // create application
   // create new instance of Application from req.body
   var application = new Application(req.body);
   application.save(function(err) {

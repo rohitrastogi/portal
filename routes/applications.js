@@ -16,7 +16,7 @@ applicationRouter.get('/', function(req, res) {
 });
 
 // get application by id
-applicationRouter.get('/:id/', function(req, res) {
+applicationRouter.get('/:id', function(req, res) {
   var id = req.params.id;
 
   Application.findById(id, function(err, application) {
@@ -59,13 +59,44 @@ applicationRouter.post('/', function(req, res) {
   });
 });
 
-applicationRouter.put('/<id>', function(req, res) {
-  // update application with given id
+// update application with given id
+applicationRouter.put('/:id', function(req, res) {
+  var id = req.params.id;
+  var changes = req.body;
+
+  Application.findById(id, function(err, application) {
+    if (err) {
+      res.send(err);
+    } else {
+      for (key in changes) {
+        if (changes.hasOwnProperty(key)) {
+          application[key] = changes[key];
+        }
+      }
+
+      application.save(function(err) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send({ status: true });
+        }
+      });
+    }
+  });
 });
 
-applicationRouter.delete('/<id>', function(req, res) {
-  // delete application with given id
-})
+// delete application with given id
+applicationRouter.delete('/:id', function(req, res) {
+  var id = req.params.id;
+
+  Application.remove({ _id: id }, function(err, application) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json({ status: true });
+    }
+  });
+});
 
 // expose applicationRouter as a module
 module.exports = applicationRouter;

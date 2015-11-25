@@ -3,9 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-// this is all you Jaiveer
 var ApplicationSchema = new Schema({
-
 	firstName: String,
 	lastName: String,
 	email: String,
@@ -20,8 +18,6 @@ var ApplicationSchema = new Schema({
 	response1: String,
 	response2: String,
 	applicationDate: Date
-
-
 });
 
 // expose Application schema to the entire application

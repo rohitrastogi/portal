@@ -1,7 +1,12 @@
 // routes/applications.js
 
 var express = require('express');
+var multer = require('multer');
+var fs = require('fs');
+
 var applicationRouter = express.Router();
+var upload = multer({ dest: 'resumes/' });
+
 var Application = require('../models/Application.js');
 
 // return all applications
@@ -46,7 +51,17 @@ applicationRouter.get('/:key/:value', function(req, res) {
 });
 
 // create application
-applicationRouter.post('/', function(req, res) {
+// CLIENT MUST USE FORM-DATA WHEN SUBMITTING FORM FOR ONLY THIS ENDPOINT
+// ALL OTHER ENDPOINTS USE urlencoded
+applicationRouter.post('/', upload.single('resume'), function(req, res) {
+  // rename downloaded file
+  if (req.file) {
+    var filename = req.file.filename;
+    var newFilename = req.body.firstName + '_' + req.body.lastName + '_Resume.pdf';
+    fs.renameSync('./resumes/' + filename, './resumes/' + newFilename);
+    req.body['resume'] = newFilename;
+  }
+
   // create new instance of Application from req.body
   var application = new Application(req.body);
   application.save(function(err) {

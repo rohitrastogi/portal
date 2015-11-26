@@ -18,6 +18,10 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// /applications endpoints require authentication
+// add Authorization: Bearer <token> to request header
+app.use('/applications', expressJwt({ secret: secret.tokenSecret }));
+
 // connect to remote DB
 // var dbUrl = (process.env.NODE_ENV === 'production' ? db.prodUrl : db.devUrl);
 var dbUrl = db.prodUrl;
@@ -35,7 +39,6 @@ mongo.once('open', function() {
 // endpoints are /application/<id>
 app.use('/auth', authRouter);
 app.use('/applications', applicationRouter);
-app.use('/applications', expressJwt({ secret: secret.tokenSecret }));
 
 app.set('port', 3000);
 

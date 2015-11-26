@@ -4,10 +4,13 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var expressJwt = require('express-jwt');
 
 // modules
 var applicationRouter = require('./routes/applications.js');
+var authRouter = require('./routes/authentication.js');
 var db = require('./config/db.js');
+var secret = require('./config/secret.js');
 
 var app = express();
 
@@ -30,7 +33,9 @@ mongo.once('open', function() {
 
 // apply application routes to app
 // endpoints are /application/<id>
+app.use('/auth', authRouter);
 app.use('/applications', applicationRouter);
+app.use('/applications', expressJwt({ secret: secret.tokenSecret }));
 
 app.set('port', 3000);
 

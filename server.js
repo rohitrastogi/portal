@@ -43,7 +43,7 @@ mongo.once('open', function() {
 app.use('/auth', authRouter);
 app.use('/applications', applicationRouter);
 
-app.set('port', 3000);
+app.set('port', (process.env.NODE_ENV === 'production' ? process.env.PROD_PORT: process.env.DEV_PORT));
 
 app.get('/', function(req, res) {
   res.send('The Wildhacks API lives here!');

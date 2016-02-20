@@ -7,6 +7,7 @@ var Schema = mongoose.Schema;
 var ApplicationSchema = new Schema({
 	firstName: String,
 	lastName: String,
+	phoneNumber: String,
 	email: String,
 	password: String,
 	school: String,

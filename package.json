@@ -24,6 +24,7 @@
     "express-jwt": "^3.3.0",
     "jsonwebtoken": "^5.4.1",
     "mongoose": "^4.2.5",
-    "multer": "^1.1.0"
+    "multer": "^1.1.0",
+    "node-env-file": "^0.1.8"
   }
 }

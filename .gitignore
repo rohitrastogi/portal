@@ -2,3 +2,4 @@
 /config/db.js
 /config/secret.js
 /resumes
+.env

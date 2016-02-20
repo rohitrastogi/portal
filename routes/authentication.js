@@ -8,7 +8,6 @@ var authRouter = express.Router();
 var upload = multer({ dest: 'resumes/' });
 
 var Application = require('../models/Application.js');
-var secret = require('../config/secret.js');
 
 // signup route
 // should be used when first create an application
@@ -31,7 +30,7 @@ authRouter.post('/signup', upload.single('resume'), function(req, res) {
       res.send(err);
     } else {
       // return token
-      var token = jwt.sign(application, secret.tokenSecret, { expiresIn: 18000 });
+      var token = jwt.sign(application, process.env.JWT_SECRET, { expiresIn: 18000 });
       res.json({ token: token });
     }
   });
@@ -49,7 +48,7 @@ authRouter.post('/login', function(req, res) {
         res.send(401, 'Not authorized!');
       }
 
-      var token = jwt.sign(application, secret.tokenSecret, { expiresIn: 18000 });
+      var token = jwt.sign(application, process.env.JWT_SECRET, { expiresIn: 18000 });
       res.json({ token: token });
     }
   });

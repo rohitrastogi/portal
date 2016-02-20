@@ -5,14 +5,16 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
+var env = require('node-env-file');
 
 // modules
 var applicationRouter = require('./routes/applications.js');
 var authRouter = require('./routes/authentication.js');
-var db = require('./config/db.js');
-var secret = require('./config/secret.js');
 
 var app = express();
+
+// configure environment
+env(__dirname + '/.env');
 
 // configure middleware
 app.use(bodyParser.json());
@@ -20,11 +22,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // /applications endpoints require authentication
 // add Authorization: Bearer <token> to request header
-app.use('/applications', expressJwt({ secret: secret.tokenSecret }));
+app.use('/applications', expressJwt({ secret: process.env.JWT_SECRET }));
 
 // connect to remote DB
-// var dbUrl = (process.env.NODE_ENV === 'production' ? db.prodUrl : db.devUrl);
-var dbUrl = db.prodUrl;
+// var dbUrl = (
+//   process.env.NODE_ENV === 'production' ? process.env.DB_PROD_URL : process.env.DB_DEV_URL
+// );
+var dbUrl = process.env.DB_DEV_URL;
 var mongo = mongoose.connect(dbUrl).connection;
 
 mongo.on('error', function(err) {

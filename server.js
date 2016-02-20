@@ -25,10 +25,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/applications', expressJwt({ secret: process.env.JWT_SECRET }));
 
 // connect to remote DB
-// var dbUrl = (
-//   process.env.NODE_ENV === 'production' ? process.env.DB_PROD_URL : process.env.DB_DEV_URL
-// );
-var dbUrl = process.env.DB_DEV_URL;
+var dbUrl = (
+  process.env.NODE_ENV === 'production' ? process.env.DB_PROD_URL : process.env.DB_DEV_URL
+);
 var mongo = mongoose.connect(dbUrl).connection;
 
 mongo.on('error', function(err) {

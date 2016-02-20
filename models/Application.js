@@ -11,14 +11,13 @@ var ApplicationSchema = new Schema({
 	password: String,
 	school: String,
 	year: Number,
+	gender: String,
 	shirtSize: String,
-	reimbursement: Boolean,
+	travel: String,
+	dietaryRestrictions: String,
 	github: String,
-	linkedin: String,
 	personalSite: String,
 	resume: String,
-	response1: String,
-	response2: String,
 	applicationDate: Date
 });
 

@@ -52,8 +52,14 @@ authRouter.post('/login', function(req, res) {
         res.send(401, 'Not authorized!');
       }
 
-      var token = jwt.sign(application, process.env.JWT_SECRET, { expiresIn: 18000 });
-      res.json({ token: token });
+      if (req.body.email === process.env.ADMIN_EMAIL) {
+        // admin access
+        // render admin panel
+      } else {
+        var token = jwt.sign(application, process.env.JWT_SECRET, { expiresIn: 18000 });
+        res.json({ token: token });
+        // res.render(react sdfajd)
+      }
     }
   });
 

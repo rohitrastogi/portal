@@ -22,7 +22,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // /applications endpoints require authentication
 // add Authorization: Bearer <token> to request header
-app.use('/applications', expressJwt({ secret: process.env.JWT_SECRET }));
+// app.use('/applications', expressJwt({ secret: process.env.JWT_SECRET }));
+app.use('/applications', function(req, res, next) {
+  console.log('this is an applications endpoint');
+  next();
+});
 
 // connect to remote DB
 var dbUrl = (

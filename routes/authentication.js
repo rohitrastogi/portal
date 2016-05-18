@@ -22,8 +22,12 @@ authRouter.post('/signup', upload.single('resume'), function(req, res) {
 
   // create new instance of Application from req.body
   var application = new Application(req.body);
+  
   // hash password before saving
   application.password = application.hashPassword(application.password);
+
+  // fill in application date
+  application.applicationDate = new Date();
 
   application.save(function(err) {
     if (err) {
@@ -44,7 +48,6 @@ authRouter.post('/login', function(req, res) {
     if (err) {
       res.send(err);
     } else {
-      console.log(application)
       if (!application.isValidPassword(pass)) {
         res.send(401, 'Not authorized!');
       }

@@ -5,21 +5,21 @@ var bcrypt = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 
 var ApplicationSchema = new Schema({
-	firstName: String,
-	lastName: String,
-	phoneNumber: String,
-	email: String,
-	password: String,
-	school: String,
-	year: Number,
-	gender: String,
-	shirtSize: String,
-	travel: String,
-	dietaryRestrictions: String,
-	github: String,
-	personalSite: String,
-	resume: String,
-	applicationDate: Date
+	firstName						: {type: String, required: true},
+	lastName						: {type: String, required: true},
+	phoneNumber					: {type: String, required: true},
+	email								: {type: String, required: true, unique: true, dropDups: true},
+	password 						: {type: String, required: true},
+	school      				: {type: String, required: true},
+	year								: {type: Number, required: true},
+	gender							: {type: String, required: true},
+	shirtSize						: {type: String, required: true},
+	travel							: {type: String, required: true},
+	dietaryRestrictions	: {type: String},
+	github							: {type: String},
+	personalSite				: {type: String},
+	resume							: {type: String},
+	applicationDate			: {type: Date, required: true},
 });
 
 ApplicationSchema.methods.hashPassword = function(password) {

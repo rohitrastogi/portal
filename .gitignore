@@ -2,4 +2,5 @@
 /config/db.js
 /config/secret.js
 /resumes
+npm-debug.log
 .env

@@ -44,6 +44,7 @@ authRouter.post('/login', function(req, res) {
     if (err) {
       res.send(err);
     } else {
+      console.log(application)
       if (!application.isValidPassword(pass)) {
         res.send(401, 'Not authorized!');
       }

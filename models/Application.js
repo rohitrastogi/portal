@@ -23,11 +23,13 @@ var ApplicationSchema = new Schema({
 });
 
 ApplicationSchema.methods.hashPassword = function(password) {
-	return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+	return bcrypt.hashSync(password, bcrypt.genSaltSync());
 };
 
 ApplicationSchema.methods.isValidPassword = function(password) {
-	return bcrypt.compareSync(password, this.password);
+	pass = String(password)
+	hash = String(this.password)
+	return bcrypt.compareSync(pass, hash);
 };
 
 // expose Application schema to the entire application

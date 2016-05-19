@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var expressJwt = require('express-jwt');
 var env = require('node-env-file');
+var jwt = require('jsonwebtoken');
 
 // modules
 var applicationRouter = require('./routes/applications.js');
@@ -22,10 +23,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // /applications endpoints require authentication
 // add Authorization: Bearer <token> to request header
-// app.use('/applications', expressJwt({ secret: process.env.JWT_SECRET }));
+app.use('/applications', expressJwt({ secret: process.env.JWT_SECRET }));
+// use a middleware function to ensure that only admin can access /applications endpoints
 app.use('/applications', function(req, res, next) {
-  console.log('this is an applications endpoint');
-  next();
+  var token = req.headers.authorization.split(' ')[1];
+  var user = jwt.decode(token);
+  if (user.email === process.env.ADMIN_EMAIL) {
+    next();
+  } else {
+    // unauthorized
+    return res.sendStatus(403)
+  }
 });
 
 // connect to remote DB

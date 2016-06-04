@@ -13,6 +13,7 @@ var ApplicationSchema = new Schema({
 	school      				: {type: String, required: true},
 	year								: {type: Number, required: true},
 	gender							: {type: String, required: true},
+	ethnicity						: {type: String},
 	shirtSize						: {type: String, required: true},
 	travel							: {type: String, required: true},
 	dietaryRestrictions	: {type: String},

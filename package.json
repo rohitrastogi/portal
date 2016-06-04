@@ -6,7 +6,10 @@
   "scripts": {
     "start": "NODE_ENV=development node server.js",
     "prod": "sudo NODE_ENV=production node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "./node_modules/.bin/webpack",
+    "watch": "./node_modules/.bin/webpack -w",
+    "clean": "rm -r ./dist/"
   },
   "repository": {
     "type": "git",
@@ -23,9 +26,17 @@
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "express-jwt": "^3.3.0",
+    "flux": "^2.1.1",
     "jsonwebtoken": "^5.4.1",
     "mongoose": "^4.2.5",
     "multer": "^1.1.0",
     "node-env-file": "^0.1.8"
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "html-webpack-plugin": "^2.19.0",
+    "webpack": "^1.13.1"
   }
 }

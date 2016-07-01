@@ -1,5 +1,5 @@
 {
-  "name": "Wildhacks 2016",
+  "name": "wildhacks-app",
   "version": "1.0.0",
   "description": "Wildhacks 2016 Website",
   "main": "server.js",

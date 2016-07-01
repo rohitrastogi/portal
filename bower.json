@@ -1,0 +1,7 @@
+{
+  "name": "WildHacks 2016",
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "magnific-popup": "^1.0.0"
+  }
+}

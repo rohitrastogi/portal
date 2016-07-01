@@ -7,9 +7,15 @@
     "start": "NODE_ENV=development node server.js",
     "prod": "sudo NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "./node_modules/.bin/webpack",
-    "watch": "./node_modules/.bin/webpack -w",
+    "watch": "NODE_ENV=development nodemon server.js",
+    "bundle" : "gulp",
     "clean": "rm -r ./dist/"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
   },
   "repository": {
     "type": "git",
@@ -58,6 +64,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.4.2",
     "gulp-util": "^3.0.7",
+    "swig": "^1.4.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.6.0"

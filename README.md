@@ -4,7 +4,7 @@
 - `git clone https://github.com/NUWildHacks/portal.git`
 - Navigate to the cloned folder, and run `npm install` to install required dependencies
 - Run `bower install` to download the assets, specified in `bower.json`. 
-- Setup your local MongoDB database. Mongo has some (pretty good documentation)[https://docs.mongodb.com/getting-started/shell/installation/] on that.
+- Setup your local MongoDB database. Mongo has some [pretty good documentation](https://docs.mongodb.com/getting-started/shell/installation/) on that.
 - Setup your local development environment. Ask one of your fave tech buds to provide you with environment variables. You won't be able to run the project without them.
 
 ### Running

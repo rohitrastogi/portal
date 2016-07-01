@@ -13,6 +13,7 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
+var nodemon = require('gulp-nodemon');
 
 var production = process.env.NODE_ENV === 'production';
 
@@ -96,9 +97,19 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('public/css'));
 });
 
+// Watch assets
 gulp.task('watch', function() {
   gulp.watch('app/stylesheets/**/*.scss', ['styles']);
 });
 
-gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'watch']);
+// Watch server
+gulp.task('server', function () {
+  nodemon({
+    script: 'server.js',
+    ext: 'js html',
+    env: { 'NODE_ENV': 'development' }
+  })
+})
+
+gulp.task('default', ['styles', 'vendor', 'browserify-watch', 'watch', 'server']);
 gulp.task('build', ['styles', 'vendor', 'browserify']);

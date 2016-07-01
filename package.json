@@ -1,14 +1,13 @@
 {
-  "name": "api",
+  "name": "Wildhacks 2016",
   "version": "1.0.0",
-  "description": "Wildhacks API",
+  "description": "Wildhacks 2016 Website",
   "main": "server.js",
   "scripts": {
     "start": "NODE_ENV=development node server.js",
     "prod": "sudo NODE_ENV=production node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "NODE_ENV=development nodemon server.js",
-    "bundle" : "gulp",
+    "watch": "gulp",
     "clean": "rm -r ./dist/"
   },
   "babel": {
@@ -59,6 +58,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-cssmin": "^0.1.7",
     "gulp-if": "^2.0.0",
+    "gulp-nodemon": "^2.1.0",
     "gulp-plumber": "^1.0.1",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",

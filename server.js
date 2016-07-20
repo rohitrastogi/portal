@@ -11,10 +11,15 @@ var ReactDOM = require('react-dom/server');
 var Router = require('react-router');
 var routes = require('./app/routes');
 var path = require('path');
+//for passport
+var passport = require('passport');
+var session = require('express-session');
+require('./passport.js');
 
 // API Routes
 var applicationRouter = require('./routes/applications.js');
 var authRouter = require('./routes/authentication.js');
+var githubRouter = require('./routes/github_routes.js');
 
 var app = express();
 
@@ -24,6 +29,12 @@ env(__dirname + '/.env');
 // configure middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//passport middleware
+app.use(session({ secret: process.env.JWT_SECRET}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 // get static assets
 app.use(express.static(path.join(__dirname, 'public')));
@@ -78,6 +89,9 @@ mongo.once('open', function() {
 // endpoints are /application/<id>
 app.use('/auth', authRouter);
 app.use('/applications', applicationRouter);
+
+//apply facebook routes to app
+app.use('/github_routes', githubRouter);
 
 app.set('port', (process.env.NODE_ENV === 'production' ? process.env.PROD_PORT: process.env.DEV_PORT));
 
